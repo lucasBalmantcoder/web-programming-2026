@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- Declaração do tipo de documento: HTML5 -->
+<html lang="pt-BR">
+<!-- Elemento raiz da página, idioma português do Brasil -->
+
+<head>
+    <!-- Metadados da página -->
+    <meta charset="UTF-8">
+    <!-- Codificação UTF-8, para acentos funcionarem corretamente -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Torna a página responsiva em dispositivos móveis -->
+    <title>Produtos Naturais da Amazônia - Um Universo Químico</title>
+    <!-- Título exibido na aba do navegador -->
+    <link rel="stylesheet" href="estilo.css">
+    <!-- Liga o arquivo CSS externo -->
+</head>
+
+<body>
+    <!-- Corpo visível da página -->
+
+    <header class="topo">
+        <!-- Cabeçalho com o nome do tema -->
+        <h1>🌿 Produtos Naturais da Amazônia</h1>
+        <p class="subtitulo">Um universo químico escondido na maior floresta tropical do mundo</p>
+
+        <button id="botaoModoEscuro" class="botao-secundario">🌙 Modo Escuro</button>
+        <!-- Botão que alterna entre tema claro e escuro -->
+    </header>
+
+    <main>
+        <!-- Conteúdo principal -->
+
+        <section id="boasVindas" class="secao">
+            <!-- Seção de saudação personalizada -->
+            <h2>Olá, explorador(a)!</h2>
+            <p>Digite seu nome para começar a jornada:</p>
+
+            <input type="text" id="campoNome" placeholder="Seu nome aqui...">
+            <!-- Campo de entrada para o nome do visitante -->
+            <button id="botaoSaudar" class="botao-primario">Começar</button>
+            <!-- Botão que dispara a saudação -->
+
+            <p id="mensagemSaudacao" class="destaque"></p>
+            <!-- Preenchido dinamicamente pelo JavaScript -->
+        </section>
+
+        <section class="secao">
+            <!-- Seção introdutória sobre o tema -->
+            <h2>Por que a Amazônia importa?</h2>
+            <p>
+                A Amazônia abriga uma das maiores diversidades biológicas do planeta.
+                Cada planta, fungo e microrganismo pode produzir moléculas únicas —
+                chamadas de produtos naturais — que a ciência ainda está descobrindo.
+            </p>
+
+            <button id="botaoDetalhes" class="botao-secundario">Ver mais detalhes</button>
+            <!-- Mostra/esconde o bloco de detalhes -->
+
+            <div id="detalhesExtra" class="caixa-detalhes escondido">
+                <!-- Bloco de detalhes, inicialmente escondido via CSS -->
+                <h3>Para onde vão essas descobertas?</h3>
+                <ul>
+                    <li>Desenvolvimento de novos medicamentos</li>
+                    <li>Cosméticos e produtos naturais</li>
+                    <li>Defensivos agrícolas biológicos</li>
+                    <li>Estudos de biodiversidade e conservação</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="secao">
+            <!-- Seção da curiosidade rotativa -->
+            <h2>Curiosidade da vez</h2>
+            <p id="textoCuriosidade" class="destaque">
+                Clique no botão abaixo para descobrir uma curiosidade!
+            </p>
+            <!-- Texto da curiosidade atual, trocado pelo JavaScript -->
+
+            <button id="botaoCuriosidade" class="botao-primario">🌱 Nova curiosidade</button>
+            <!-- Avança para a próxima curiosidade da lista -->
+
+            <p>Curiosidades vistas: <span id="contadorCuriosidades">0</span></p>
+            <!-- Contador de curiosidades já exibidas -->
+        </section>
+
+        <section class="secao">
+            <!-- Seção do quiz rápido -->
+            <h2>Teste seu conhecimento</h2>
+            <p id="perguntaQuiz" class="destaque">Carregando pergunta...</p>
+            <!-- Texto da pergunta atual do quiz -->
+
+            <div class="opcoes-quiz">
+                <button id="opcaoA" class="botao-secundario">A</button>
+                <button id="opcaoB" class="botao-secundario">B</button>
+                <button id="opcaoC" class="botao-secundario">C</button>
+                <!-- Três botões de alternativa; o texto de cada um é definido via JavaScript -->
+            </div>
+
+            <p id="resultadoQuiz" class="destaque"></p>
+            <!-- Feedback (acerto/erro) exibido após a escolha -->
+            <button id="botaoProximaPergunta" class="botao-secundario escondido">Próxima pergunta</button>
+            <!-- Avança para a próxima pergunta do quiz -->
+        </section>
+
+        <section class="secao">
+            <!-- Formulário de interesse em receber novidades -->
+            <h2>Quero saber mais</h2>
+            <form id="formularioInscricao">
+                <!-- Envio controlado pelo JavaScript -->
+
+                <label for="campoEmail">E-mail:</label>
+                <input type="text" id="campoEmail" placeholder="exemplo@email.com">
+                <!-- Campo de e-mail -->
+
+                <label for="campoMensagem">O que mais te interessou até aqui?</label>
+                <textarea id="campoMensagem" rows="3" placeholder="Escreva aqui..."></textarea>
+                <!-- Campo de mensagem -->
+
+                <button type="submit" class="botao-primario">Enviar</button>
+                <!-- Botão de envio -->
+            </form>
+
+            <p id="mensagemFormulario" class="destaque"></p>
+            <!-- Confirmação ou erro do envio -->
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <!-- Rodapé -->
+        <p>Página educativa sobre produtos naturais da Amazônia - Programação Web, UFOPA</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Liga o arquivo JavaScript, carregado ao final do body -->
+</body>
+
+</html>

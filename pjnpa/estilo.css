@@ -1,0 +1,243 @@
+/* ===================================================
+   RESET BÁSICO (seletor por tag: *)
+=================================================== */
+* {
+    margin: 0;
+    /* remove margem padrão de todos os elementos */
+    padding: 0;
+    /* remove espaçamento interno padrão de todos os elementos */
+    box-sizing: border-box;
+    /* padding e borda não aumentam o tamanho total do elemento */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    /* fonte padrão usada em toda a página */
+}
+
+/* ===================================================
+   CORPO DA PÁGINA (seletor por tag: body)
+=================================================== */
+body {
+    background-color: #0b2e1f;
+    /* verde bem escuro, remetendo à floresta */
+    color: #eef5ee;
+    /* texto claro, para contrastar com o fundo escuro */
+    line-height: 1.6;
+    /* espaçamento entre linhas, melhora a leitura */
+    transition: background-color 0.4s ease, color 0.4s ease;
+    /* anima a troca suave entre modo claro e escuro */
+}
+
+/* Modo claro, classe adicionada via JavaScript */
+body.modo-claro {
+    background-color: #f6f8f2;
+    /* fundo claro quando o modo escuro é desativado */
+    color: #1b3a2b;
+    /* texto escuro para contrastar com o fundo claro */
+}
+
+/* ===================================================
+   CABEÇALHO (seletor por classe: .topo)
+=================================================== */
+.topo {
+    text-align: center;
+    /* centraliza o conteúdo do cabeçalho */
+    padding: 40px 20px;
+    /* espaçamento interno do cabeçalho */
+    background-color: #123d29;
+    /* tom mais claro que o fundo, para destacar o topo */
+}
+
+.subtitulo {
+    color: #b7d8c4;
+    /* cor suave para o subtítulo */
+    margin-top: 8px;
+    /* espaço acima do subtítulo */
+    margin-bottom: 20px;
+    /* espaço abaixo, antes do botão de modo escuro */
+}
+
+/* ===================================================
+   SEÇÕES GERAIS (seletor por classe: .secao)
+=================================================== */
+.secao {
+    max-width: 700px;
+    /* largura máxima do conteúdo */
+    margin: 0 auto;
+    /* centraliza a seção horizontalmente */
+    padding: 30px 20px;
+    /* espaçamento interno da seção */
+    border-bottom: 1px solid #2e5c43;
+    /* linha sutil separando as seções */
+}
+
+.secao h2 {
+    margin-bottom: 12px;
+    /* espaço entre o título da seção e o conteúdo seguinte */
+    color: #ffd166;
+    /* amarelo suave, para destacar os títulos */
+}
+
+.secao p {
+    margin-bottom: 12px;
+    /* espaço entre parágrafos e os elementos seguintes */
+}
+
+/* ===================================================
+   CAMPOS DE ENTRADA (seletor por tag: input, textarea)
+=================================================== */
+input,
+textarea {
+    width: 100%;
+    /* ocupa toda a largura disponível do contêiner pai */
+    padding: 10px;
+    /* espaçamento interno confortável para digitação */
+    margin-bottom: 12px;
+    /* espaço abaixo de cada campo */
+    border-radius: 6px;
+    /* cantos arredondados */
+    border: 2px solid #2e5c43;
+    /* borda padrão dos campos */
+    background-color: #123d29;
+    /* fundo escuro do campo, combinando com o tema */
+    color: #eef5ee;
+    /* cor do texto digitado */
+    font-size: 1rem;
+    /* tamanho de fonte legível */
+    transition: border-color 0.3s ease;
+    /* anima a troca de cor da borda ao digitar */
+}
+
+/* Classe aplicada via JavaScript enquanto o usuário digita */
+.campo-ativo {
+    border-color: #ffd166;
+    /* borda amarela quando o campo está em uso */
+}
+
+/* ===================================================
+   BOTÕES (seletor por classe: .botao-primario e .botao-secundario)
+=================================================== */
+.botao-primario,
+.botao-secundario {
+    cursor: pointer;
+    /* indica que o elemento é clicável */
+    border: none;
+    /* remove borda padrão */
+    border-radius: 6px;
+    /* cantos arredondados */
+    padding: 10px 18px;
+    /* espaçamento interno do botão */
+    font-size: 1rem;
+    /* tamanho da fonte do botão */
+    margin-right: 8px;
+    /* espaço entre botões lado a lado */
+    margin-bottom: 10px;
+    /* espaço abaixo do botão, em telas menores */
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    /* pequena animação ao passar o mouse */
+}
+
+.botao-primario {
+    background-color: #ffd166;
+    /* amarelo de destaque para ações principais */
+    color: #123d29;
+    /* texto escuro para contraste */
+    font-weight: bold;
+    /* texto em negrito */
+}
+
+.botao-secundario {
+    background-color: transparent;
+    /* fundo transparente para ações secundárias */
+    color: #eef5ee;
+    /* texto claro */
+    border: 2px solid #eef5ee;
+    /* borda visível */
+}
+
+.botao-primario:hover,
+.botao-secundario:hover {
+    transform: scale(1.04);
+    /* aumenta levemente o botão ao passar o mouse */
+    opacity: 0.9;
+    /* leve transparência no hover */
+}
+
+/* Classe aplicada via JavaScript para marcar a alternativa escolhida no quiz */
+.opcao-selecionada {
+    background-color: #ffd166;
+    /* preenche o botão de amarelo quando selecionado */
+    color: #123d29;
+    /* texto escuro sobre o fundo amarelo */
+}
+
+/* ===================================================
+   BLOCO DE OPÇÕES DO QUIZ (seletor por classe: .opcoes-quiz)
+=================================================== */
+.opcoes-quiz {
+    display: flex;
+    /* organiza os botões de alternativa lado a lado */
+    gap: 10px;
+    /* espaço entre os botões */
+    flex-wrap: wrap;
+    /* permite quebrar linha em telas pequenas */
+    margin-bottom: 12px;
+    /* espaço abaixo do bloco de opções */
+}
+
+/* ===================================================
+   ELEMENTOS DE DESTAQUE
+=================================================== */
+.destaque {
+    font-weight: bold;
+    /* texto em negrito para chamar atenção */
+    color: #7ee8a7;
+    /* verde claro para indicar sucesso/destaque */
+    min-height: 24px;
+    /* reserva espaço mesmo antes do texto aparecer */
+}
+
+#contadorCuriosidades {
+    /* seletor por id: aplica-se apenas a este elemento */
+    color: #ffd166;
+    font-weight: bold;
+}
+
+/* ===================================================
+   CAIXA DE DETALHES (mostrar/esconder via JavaScript)
+=================================================== */
+.caixa-detalhes {
+    margin-top: 16px;
+    /* espaço acima da caixa de detalhes */
+    padding: 16px;
+    /* espaçamento interno da caixa */
+    background-color: #123d29;
+    /* fundo levemente diferente para destacar o bloco */
+    border-radius: 8px;
+    /* cantos arredondados */
+    border: 1px solid #2e5c43;
+    /* borda sutil */
+}
+
+.caixa-detalhes ul {
+    margin-left: 20px;
+    /* recuo da lista, para os marcadores não colarem na borda */
+}
+
+/* Classe que esconde elementos; alternada via JavaScript */
+.escondido {
+    display: none;
+    /* remove o elemento do fluxo visual da página */
+}
+
+/* ===================================================
+   RODAPÉ (seletor por classe: .rodape)
+=================================================== */
+.rodape {
+    text-align: center;
+    /* centraliza o texto do rodapé */
+    padding: 24px;
+    /* espaçamento interno do rodapé */
+    font-size: 0.9rem;
+    /* fonte um pouco menor que o texto normal */
+    color: #b7d8c4;
+    /* cor suave para não competir com o conteúdo principal */
+}
