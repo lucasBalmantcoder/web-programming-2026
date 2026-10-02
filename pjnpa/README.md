@@ -2,9 +2,11 @@
 
 ## Visão geral
 
-O PJNPA é um projeto de programação web organizado para apresentar uma aplicação de forma clara, separando a interface, a lógica de funcionamento e os recursos utilizados. Este README explica como o projeto está estruturado e como executá-lo localmente.
+O PJNPA é uma aplicação web educativa sobre produtos naturais da Amazônia e sua relação com a química. O projeto foi construído com HTML, CSS e JavaScript puro, sem dependências externas ou banco de dados.
 
 ## Como o projeto funciona
+
+Ao abrir o arquivo `index.html`, o navegador monta a interface, carrega os estilos de `estilo.css` e executa as interações definidas em `script.js`. Os dados usados pela página ficam em listas dentro do próprio JavaScript, portanto a aplicação funciona localmente e não precisa consultar uma API.
 
 O fluxo principal da aplicação é:
 
@@ -12,10 +14,12 @@ O fluxo principal da aplicação é:
 Usuário → Interface → Lógica da aplicação → Dados/recursos → Resultado na interface
 ```
 
-1. O usuário acessa a aplicação e interage com a interface.
-2. A aplicação recebe essas ações e processa as regras definidas no código.
-3. Quando necessário, os dados ou recursos são consultados e atualizados.
-4. O resultado do processamento é exibido novamente na interface.
+1. O usuário informa seu nome e recebe uma saudação personalizada.
+2. O botão de modo escuro alterna a aparência da página.
+3. A seção de detalhes pode ser expandida ou recolhida.
+4. O botão de curiosidades percorre uma lista de informações e atualiza o contador.
+5. O quiz verifica a alternativa escolhida e libera a próxima pergunta.
+6. O formulário valida o e-mail e a mensagem e mostra o resultado na própria página.
 
 Essa separação facilita a manutenção do código e permite evoluir cada parte do projeto sem comprometer as demais.
 
@@ -23,46 +27,36 @@ Essa separação facilita a manutenção do código e permite evoluir cada parte
 
 ```text
 pjnpa/
-├── README.md       # Documentação do projeto
-├── package.json     # Dependências e scripts, quando aplicável
-    index.html       # projeto
+├── index.html       # Estrutura e conteúdo da página
+├── estilo.css       # Estilos, cores e layout
+├── script.js        # Interações, dados locais, quiz e validações
+├── README.md        # Documentação do projeto
 └── .gitignore       # Arquivos ignorados pelo Git
 ```
 
-> A estrutura real pode variar de acordo com os arquivos presentes e com a tecnologia utilizada.
-
 ## Pré-requisitos
 
-- Git;
-- Node.js e npm, caso o projeto utilize JavaScript/Node.js;
-- Um editor de código.
+- Um navegador atualizado;
+- Um editor de código, caso queira alterar o projeto.
 
-## Instalação
-
-```bash
-git clone <url-do-repositorio>
-cd pjnpa
-```
-
-Se existir um arquivo `package.json`, instale as dependências:
-
-```bash
-npm install
-```
+Não é necessário instalar Node.js, npm ou outras dependências para executar a versão atual.
 
 ## Execução
 
-Para iniciar o projeto em modo de desenvolvimento, execute o script configurado no `package.json`:
+1. Abra a pasta do projeto no computador.
+2. Abra o arquivo `index.html` diretamente no navegador.
 
-```bash
-npm run dev
-```
+Como alternativa, no VS Code, use a extensão **Live Server**, clique com o botão direito em `index.html` e selecione **Open with Live Server**.
 
-Caso esse comando não esteja disponível, consulte os scripts existentes:
+Depois de abrir a página, teste o nome, o modo escuro, as curiosidades, o quiz e o formulário.
 
-```bash
-npm run
-```
+## Desenvolvimento
+
+As alterações podem ser feitas diretamente nos arquivos:
+
+- Edite a estrutura e os textos em `index.html`.
+- Edite o visual em `estilo.css`.
+- Edite as regras e os dados da aplicação em `script.js`.
 
 ## Fluxo de desenvolvimento
 

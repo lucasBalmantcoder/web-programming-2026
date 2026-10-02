@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Filmes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>🎬 Catálogo de Filmes</h1>
+
+    <form id="form-filme">
+      <input type="text" id="titulo" placeholder="Título do filme" required>
+      <input type="text" id="diretor" placeholder="Diretor" required>
+      <input type="number" id="ano" placeholder="Ano" min="1888" max="2100" required>
+      <input type="text" id="genero" placeholder="Gênero" required>
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <div class="acoes">
+      <button id="btn-limpar" class="perigo">🗑️ Limpar tudo</button>
+    </div>
+
+    <ul id="lista-filmes"></ul>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
