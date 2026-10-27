@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo Interativo de Produtos com consumo de API pública DummyJSON, pesquisa em tempo real, modal de detalhes e persistência de favoritos em localStorage.">
+  <title>Catálogo Interativo de Produtos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       CABEÇALHO PRINCIPAL DA APLICAÇÃO
+       ===================================================================== -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">🛍️</span>
+        <div class="brand-text">
+          <h1 class="brand-title">Catálogo Interativo</h1>
+          <p class="brand-subtitle">Trabalho Acadêmico • Programação Web</p>
+        </div>
+      </div>
+
+      <!-- Formulário de Busca por Nome (Requisito 2 e Funcionalidade Mínima) -->
+      <form id="search-form" class="search-form" role="search" novalidate>
+        <div class="search-input-wrapper">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <label for="search-input" class="sr-only">Buscar produtos pelo nome</label>
+          <input 
+            type="search" 
+            id="search-input" 
+            name="q" 
+            placeholder="Buscar produtos por nome (ex: phone, perfume)..." 
+            autocomplete="off"
+            aria-label="Buscar produtos pelo nome"
+          >
+          <button 
+            type="button" 
+            id="btn-clear-search" 
+            class="btn-clear-input hidden" 
+            aria-label="Limpar campo de busca"
+            title="Limpar busca"
+          >&times;</button>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn-submit-search">
+          Buscar
+        </button>
+      </form>
+
+      <!-- Botão de Acesso Rápido aos Favoritos -->
+      <div class="header-actions">
+        <button 
+          id="btn-open-favorites" 
+          class="btn btn-fav-counter" 
+          aria-label="Ver produtos favoritos"
+          title="Abrir painel de favoritos"
+        >
+          <span class="star-icon" aria-hidden="true">⭐</span>
+          <span class="fav-label">Favoritos</span>
+          <span id="fav-count-badge" class="badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL (MAIN)
+       ===================================================================== -->
+  <main class="main-content">
+    <div class="content-container">
+
+      <!-- Barra de Controle e Filtros Rápidos -->
+      <section class="controls-bar" aria-label="Controles e Filtros de Exibição">
+        <div class="status-summary">
+          <h2 id="section-heading" class="section-title">Todos os Produtos</h2>
+          <p id="results-count" class="results-count" aria-live="polite">Carregando catálogo...</p>
+        </div>
+
+        <nav class="filter-tabs" aria-label="Filtro de visualização">
+          <button type="button" id="tab-all-products" class="tab-btn active">
+            Todos os Produtos
+          </button>
+          <button type="button" id="tab-only-favorites" class="tab-btn">
+            Apenas Favoritos (<span id="tab-fav-count">0</span>)
+          </button>
+        </nav>
+      </section>
+
+      <!-- Mensagem / Spinner de Carregamento (Requisito Mínimo) -->
+      <div id="loading-state" class="feedback-card loading-box hidden" role="status" aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="feedback-title">Carregando produtos da API...</p>
+        <p class="feedback-desc">Por favor, aguarde enquanto os dados são obtidos do servidor.</p>
+      </div>
+
+      <!-- Mensagem de Erro de Rede ou API Indisponível (Requisito 4 e Funcionalidade Mínima) -->
+      <div id="error-state" class="feedback-card error-box hidden" role="alert" aria-live="assertive">
+        <div class="feedback-icon" aria-hidden="true">⚠️</div>
+        <h3 class="feedback-title">Ops! Não foi possível carregar os produtos</h3>
+        <p id="error-detail" class="feedback-desc">Houve uma falha de conexão com a API DummyJSON.</p>
+        <button type="button" id="btn-retry-fetch" class="btn btn-retry">
+          Tentar Novamente
+        </button>
+      </div>
+
+      <!-- Mensagem de Pesquisa sem Resultados (Funcionalidade Mínima) -->
+      <div id="empty-state" class="feedback-card empty-box hidden" role="region" aria-live="polite">
+        <div class="feedback-icon" aria-hidden="true">🔎</div>
+        <h3 class="feedback-title">Nenhum produto encontrado</h3>
+        <p id="empty-detail" class="feedback-desc">Não encontramos produtos correspondentes ao termo pesquisado.</p>
+        <button type="button" id="btn-reset-search" class="btn btn-secondary">
+          Voltar ao Catálogo Completo
+        </button>
+      </div>
+
+      <!-- Grade Dinâmica de Produtos (Requisito 1: Cards e Requisito 2: DOM) -->
+      <section 
+        id="products-grid" 
+        class="products-grid" 
+        aria-label="Catálogo de produtos"
+      >
+        <!-- Os cartões (article) são gerados dinamicamente via JS com document.createElement -->
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       PAINEL LATERAL (DRAWER) DE FAVORITOS (Requisito 5 e Funcionalidade Mínima)
+       ===================================================================== -->
+  <div id="favorites-overlay" class="drawer-overlay hidden" aria-hidden="true"></div>
+  <aside 
+    id="favorites-drawer" 
+    class="favorites-drawer hidden" 
+    aria-label="Painel de produtos favoritos"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="drawer-title"
+  >
+    <header class="drawer-header">
+      <div class="drawer-header-info">
+        <span class="star-icon" aria-hidden="true">⭐</span>
+        <h2 id="drawer-title" class="drawer-title">Meus Favoritos</h2>
+        <span id="drawer-badge-count" class="badge-count">0</span>
+      </div>
+      <button 
+        type="button" 
+        id="btn-close-drawer" 
+        class="btn-close" 
+        aria-label="Fechar painel de favoritos"
+        title="Fechar favoritos"
+      >&times;</button>
+    </header>
+
+    <div id="drawer-body" class="drawer-body">
+      <!-- Lista gerada dinamicamente via JavaScript -->
+      <div id="favorites-items-container" class="favorites-items-container"></div>
+
+      <!-- Estado vazio dos favoritos -->
+      <div id="drawer-empty-state" class="drawer-empty-state hidden">
+        <span class="empty-emoji" aria-hidden="true">🤍</span>
+        <p class="empty-title">Nenhum favorito salvo ainda</p>
+        <p class="empty-sub">Clique na estrelinha dos produtos no catálogo para salvá-los aqui.</p>
+      </div>
+    </div>
+
+    <footer class="drawer-footer">
+      <div class="drawer-summary">
+        <span>Total estimado:</span>
+        <strong id="drawer-total-price">R$ 0,00</strong>
+      </div>
+      <button 
+        type="button" 
+        id="btn-clear-all-favorites" 
+        class="btn btn-danger-outline"
+      >
+        Limpar Todos os Favoritos
+      </button>
+    </footer>
+  </aside>
+
+  <!-- =====================================================================
+       MODAL DE DETALHES DO PRODUTO (Funcionalidade Mínima de Detalhes)
+       ===================================================================== -->
+  <div 
+    id="modal-overlay" 
+    class="modal-overlay hidden" 
+    role="dialog" 
+    aria-modal="true" 
+    aria-labelledby="modal-title"
+  >
+    <div class="modal-card">
+      <button 
+        type="button" 
+        id="btn-close-modal" 
+        class="btn-close modal-close" 
+        aria-label="Fechar detalhes do produto"
+      >&times;</button>
+      
+      <div id="modal-content" class="modal-content">
+        <!-- Conteúdo dos detalhes injetado dinamicamente via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       SISTEMA DE NOTIFICAÇÕES (TOAST FEEDBACK)
+       ===================================================================== -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- =====================================================================
+       RODAPÉ SEMÂNTICO (Requisito 1)
+       ===================================================================== -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3 class="footer-heading">Catálogo Interativo de Produtos</h3>
+        <p class="footer-text">
+          Aplicação web client-side desenvolvida para o componente curricular de 
+          <strong>Programação Web</strong>.
+        </p>
+        <p class="footer-text small">
+          Dados fornecidos em tempo real pela API pública 
+          <a href="https://dummyjson.com/products" target="_blank" rel="noopener noreferrer">DummyJSON Products</a>.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-subheading">Tecnologias Utilizadas</h4>
+        <ul class="tech-tags">
+          <li>HTML5 Semântico</li>
+          <li>CSS3 Responsivo (Grid & Flexbox)</li>
+          <li>JavaScript Moderno (ES6+)</li>
+          <li>Fetch API (Async/Await)</li>
+          <li>localStorage API</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-subheading">Informações Acadêmicas</h4>
+        <p class="footer-text">Disciplina: Programação Web</p>
+        <p class="footer-text">Ano / Semestre: 2026.1</p>
+        <p class="footer-text">Equipe: Grupo 01</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Catálogo Interativo de Produtos. Todos os direitos reservados para fins acadêmicos.</p>
+    </div>
+  </footer>
+
+  <!-- Script JavaScript puro (Requisito Técnico: sem frameworks) -->
+  <script src="js/script.js" defer></script>
+</body>
+</html>
+
