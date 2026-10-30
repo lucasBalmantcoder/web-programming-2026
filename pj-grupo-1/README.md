@@ -11,7 +11,6 @@ Aplicação web _client-side_ desenvolvida exclusivamente com **HTML5**, **CSS3*
 | Nome Completo                     | Matrícula      | E-mail Institucional              |
 | :-------------------------------- | :------------- | :-------------------------------- |
 | _[Lucas Patrik Lopes dos Santos]_ | _[2021015036]_ | _[lucaspatrickr5@gmail.com]_      |
-| _[LUIZ OTAVIO CARIPUNA DA CUNHA]_ | _[2022004270]_ | _[luizcaripuna@gmail.com.edu.br]_ |
 
 ---
 
